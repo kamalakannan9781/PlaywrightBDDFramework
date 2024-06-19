@@ -1,0 +1,41 @@
+{
+  "name": "playwrightframework",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "transpile": "rimraf dist && babel --extensions .ts --out-dir dist src",
+    "cucumber": "npm run transpile && cucumber-js",
+    "all": "cucumber-js features/**/*.feature",
+    "all:allure": "USE_ALLURE=1 cucumber-js features/**/*.feature",
+    "pretest": "npx ts-node report/init.ts",
+    "test": "cucumber-js test",
+    "posttest": "npx ts-node report/report.ts",
+    "test:parallel": "cucumber-js --parallel=2",
+    "docker": "docker run --rm --network host -v $(pwd):/work/ -w /work/ -it mcr.microsoft.com/playwright:latest /bin/bash",
+    "allure": "npx allure serve reports/allure-results"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.18.9",
+    "@babel/preset-env": "^7.18.9",
+    "@babel/preset-typescript": "^7.18.6",
+    "@cucumber/cucumber": "^10.8.0",
+    "@playwright/test": "^1.44.1",
+    "@types/node": "^20.14.2",
+    "allure-playwright": "^3.0.0-beta.3",
+    "fs-extra": "^11.2.0",
+    "monocart-reporter": "^2.4.9",
+    "multiple-cucumber-html-reporter": "^3.6.2",
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "allure-commandline": "^2.29.0",
+    "allure-cucumberjs": "^3.0.0-beta.3",
+    "allure-js-commons": "^3.0.0-beta.3",
+    "playwright": "^1.44.1",
+    "typescript": "^5.4.5"
+  }
+}
